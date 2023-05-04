@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+    - develop
+    - main
+  workflow_dispatch:
+    
+jobs:
+  prod-check:
+    if: ${{ env == 'main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to production server on branch $GITHUB_REF"
+  dev-check:
+    if: ${{ github.env == 'prod' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to production server on branch $GITHUB_REF"
+  uat-check: 
+    if: ${{ github.env == 'main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to production server on branch $GITHUB_REF"
