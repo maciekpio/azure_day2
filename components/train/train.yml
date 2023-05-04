@@ -1,0 +1,29 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: maciej_data_train_credit_defaults
+display_name: maciej_data_train
+version: 2
+
+inputs:
+  train_data:
+    type: uri_folder
+  test_data:
+    type: uri_folder
+  learning_rate:
+    type: number
+  registered_model_name:
+    type: string
+
+outputs:
+  model:
+    type: uri_folder
+
+code: .
+
+environment: 
+  azureml:AzureML-sklearn-1.0-ubuntu20.04-py38-cpu:1
+
+command: >-
+  python train.py --train_data ${{inputs.train_data}} --test_data ${{inputs.test_data}} --learning_rate ${{inputs.learning_rate}} --registered_model_name ${{inputs.registered_model_name}} --model ${{outputs.model}}
+# Write a YAML specification file which implements the component
